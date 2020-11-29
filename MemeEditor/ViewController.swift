@@ -31,7 +31,10 @@ class ViewController: UIViewController, UIImagePickerControllerDelegate, UINavig
         textField.defaultTextAttributes = memeTextAttributes
         textField.delegate = memeTextDelegate
         textField.textAlignment = .center
-        
+
+        // TODO although it appears at the front
+        // Easy solution: add background color white to text
+        self.view.bringSubviewToFront(textField)
     }
 
     override func viewWillAppear(_ animated: Bool) {
