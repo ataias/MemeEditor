@@ -9,7 +9,7 @@ import UIKit
 
 class ViewController: UIViewController, UIImagePickerControllerDelegate, UINavigationControllerDelegate {
 
-    @IBOutlet weak var imagePickerView: UIImageView!
+    @IBOutlet weak var imageView: UIImageView!
     @IBOutlet weak var cameraButton: UIBarButtonItem!
     @IBOutlet weak var shareButton: UIBarButtonItem!
     @IBOutlet weak var topTextField: UITextField!
@@ -31,6 +31,7 @@ class ViewController: UIViewController, UIImagePickerControllerDelegate, UINavig
         textField.defaultTextAttributes = memeTextAttributes
         textField.delegate = memeTextDelegate
         textField.textAlignment = .center
+        
     }
 
     override func viewWillAppear(_ animated: Bool) {
@@ -48,16 +49,18 @@ class ViewController: UIViewController, UIImagePickerControllerDelegate, UINavig
     }
 
     @IBAction func pickAnImageFromAlbum(_ sender: Any) {
-        let pickerController = UIImagePickerController()
-        pickerController.delegate = self
-        pickerController.sourceType = .photoLibrary
-        present(pickerController, animated: true, completion: nil)
+        pickImage(.photoLibrary)
     }
 
     @IBAction func pickAnImageFromCamera(_ sender: Any) {
+        pickImage(.camera)
+    }
+
+    func pickImage(_ sourceType: UIImagePickerController.SourceType) {
         let pickerController = UIImagePickerController()
+        pickerController.allowsEditing = true
         pickerController.delegate = self
-        pickerController.sourceType = .camera
+        pickerController.sourceType = sourceType
         present(pickerController, animated: true, completion: nil)
     }
 
@@ -65,7 +68,7 @@ class ViewController: UIViewController, UIImagePickerControllerDelegate, UINavig
     func imagePickerController(_ picker: UIImagePickerController, didFinishPickingMediaWithInfo info: [UIImagePickerController.InfoKey : Any]) {
 
         if let image = info[.originalImage] as? UIImage {
-            imagePickerView.image = image
+            imageView.image = image
             updateShareButtonState()
         }
         picker.dismiss(animated: true, completion: nil)
@@ -126,7 +129,7 @@ class ViewController: UIViewController, UIImagePickerControllerDelegate, UINavig
     }
 
     func updateShareButtonState() {
-        shareButton.isEnabled = topTextField.hasText && bottomTextField.hasText && imagePickerView.image != nil
+        shareButton.isEnabled = topTextField.hasText && bottomTextField.hasText && imageView.image != nil
     }
 
     @IBAction func share() {
