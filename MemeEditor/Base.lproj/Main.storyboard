@@ -16,13 +16,13 @@
                         <rect key="frame" x="0.0" y="0.0" width="414" height="896"/>
                         <autoresizingMask key="autoresizingMask" widthSizable="YES" heightSizable="YES"/>
                         <subviews>
-                            <textField opaque="NO" contentMode="scaleToFill" contentHorizontalAlignment="left" contentVerticalAlignment="center" text="This is the top text field" borderStyle="roundedRect" textAlignment="center" minimumFontSize="17" translatesAutoresizingMaskIntoConstraints="NO" id="cOM-zN-T9a" userLabel="Top Text Field">
-                                <rect key="frame" x="10" y="84" width="394" height="34"/>
+                            <textField opaque="NO" contentMode="scaleToFill" contentHorizontalAlignment="left" contentVerticalAlignment="center" placeholder="TOP MESSAGE" textAlignment="center" minimumFontSize="17" translatesAutoresizingMaskIntoConstraints="NO" id="cOM-zN-T9a" userLabel="Top Text Field">
+                                <rect key="frame" x="10" y="84" width="394" height="18.5"/>
                                 <fontDescription key="fontDescription" type="system" pointSize="14"/>
                                 <textInputTraits key="textInputTraits" autocapitalizationType="allCharacters"/>
                             </textField>
-                            <textField opaque="NO" contentMode="scaleToFill" contentHorizontalAlignment="left" contentVerticalAlignment="center" text="This is bottom text field" borderStyle="roundedRect" textAlignment="center" minimumFontSize="17" translatesAutoresizingMaskIntoConstraints="NO" id="F5T-5T-VKh" userLabel="Bottom Text Field">
-                                <rect key="frame" x="10" y="758" width="394" height="34"/>
+                            <textField opaque="NO" contentMode="scaleToFill" contentHorizontalAlignment="left" contentVerticalAlignment="center" placeholder="BOTTOM MESSAGE" textAlignment="center" minimumFontSize="17" translatesAutoresizingMaskIntoConstraints="NO" id="F5T-5T-VKh" userLabel="Bottom Text Field">
+                                <rect key="frame" x="10" y="773.5" width="394" height="18.5"/>
                                 <fontDescription key="fontDescription" type="system" pointSize="14"/>
                                 <textInputTraits key="textInputTraits" autocapitalizationType="allCharacters"/>
                             </textField>
@@ -48,11 +48,7 @@
                                         </connections>
                                     </barButtonItem>
                                     <barButtonItem style="plain" systemItem="flexibleSpace" id="xBe-Tl-yIF"/>
-                                    <barButtonItem title="Share" image="square.and.arrow.up" catalog="system" id="6S7-xb-ItB" userLabel="Share Button">
-                                        <connections>
-                                            <action selector="pickAnImageFromCamera:" destination="BYZ-38-t0r" id="zNy-4h-5ZL"/>
-                                        </connections>
-                                    </barButtonItem>
+                                    <barButtonItem title="Share" image="square.and.arrow.up" catalog="system" id="6S7-xb-ItB" userLabel="Share Button"/>
                                 </items>
                             </toolbar>
                         </subviews>
@@ -76,7 +72,7 @@
                     </view>
                     <connections>
                         <outlet property="bottomTextField" destination="F5T-5T-VKh" id="RC2-Jt-pdy"/>
-                        <outlet property="cameraButton" destination="6S7-xb-ItB" id="DMW-wO-gVT"/>
+                        <outlet property="cameraButton" destination="Mg3-ba-jS2" id="xhi-jM-LhH"/>
                         <outlet property="imagePickerView" destination="JJT-iB-9fc" id="6R1-l0-Kx6"/>
                         <outlet property="topTextField" destination="cOM-zN-T9a" id="hGv-4T-OT8"/>
                     </connections>
