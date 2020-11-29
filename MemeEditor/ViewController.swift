@@ -22,13 +22,15 @@ class ViewController: UIViewController, UIImagePickerControllerDelegate, UINavig
     override func viewDidLoad() {
         super.viewDidLoad()
 
-        topTextField.defaultTextAttributes = memeTextAttributes
-        bottomTextField.defaultTextAttributes = memeTextAttributes
-
         memeTextDelegate.postUpdateAction = { self.updateShareButtonState() }
+        configure(textField: topTextField)
+        configure(textField: bottomTextField)
+    }
 
-        topTextField.delegate = memeTextDelegate
-        bottomTextField.delegate = memeTextDelegate
+    func configure(textField: UITextField) {
+        textField.defaultTextAttributes = memeTextAttributes
+        textField.delegate = memeTextDelegate
+        textField.textAlignment = .center
     }
 
     override func viewWillAppear(_ animated: Bool) {
