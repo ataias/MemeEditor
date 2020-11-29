@@ -48,7 +48,11 @@
                                         </connections>
                                     </barButtonItem>
                                     <barButtonItem style="plain" systemItem="flexibleSpace" id="xBe-Tl-yIF"/>
-                                    <barButtonItem title="Share" image="square.and.arrow.up" catalog="system" id="6S7-xb-ItB" userLabel="Share Button"/>
+                                    <barButtonItem title="Share" image="square.and.arrow.up" catalog="system" id="6S7-xb-ItB" userLabel="Share Button">
+                                        <connections>
+                                            <action selector="share" destination="BYZ-38-t0r" id="SxZ-ee-Ygj"/>
+                                        </connections>
+                                    </barButtonItem>
                                 </items>
                             </toolbar>
                         </subviews>

@@ -108,10 +108,8 @@ class ViewController: UIViewController, UIImagePickerControllerDelegate, UINavig
         return keyboardSize.cgRectValue.height
     }
 
-    // TODO: Create an action for this
     func generateMemedImage() -> UIImage {
 
-        // TODO: Hide toolbar and navbar
         toolbar.isHidden = true
 
         // Render view to an image
@@ -120,7 +118,6 @@ class ViewController: UIViewController, UIImagePickerControllerDelegate, UINavig
         let memedImage:UIImage = UIGraphicsGetImageFromCurrentImageContext()!
         UIGraphicsEndImageContext()
 
-        // TODO: Show toolbar and navbar
         toolbar.isHidden = false
 
         return memedImage
@@ -128,6 +125,13 @@ class ViewController: UIViewController, UIImagePickerControllerDelegate, UINavig
 
     func updateShareButtonState() {
         shareButton.isEnabled = topTextField.hasText && bottomTextField.hasText && imagePickerView.image != nil
+    }
+
+    @IBAction func share() {
+        let image = generateMemedImage()
+
+        let shareController = UIActivityViewController(activityItems: [image], applicationActivities: [])
+        present(shareController, animated: true)
     }
 }
 
