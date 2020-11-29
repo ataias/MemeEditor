@@ -11,17 +11,22 @@ class ViewController: UIViewController, UIImagePickerControllerDelegate, UINavig
 
     @IBOutlet weak var imagePickerView: UIImageView!
     @IBOutlet weak var cameraButton: UIBarButtonItem!
+    @IBOutlet weak var shareButton: UIBarButtonItem!
     @IBOutlet weak var topTextField: UITextField!
     @IBOutlet weak var bottomTextField: UITextField!
+
+    @IBOutlet weak var toolbar: UIToolbar!
 
     let memeTextDelegate = MyTextFieldDelegate()
 
     override func viewDidLoad() {
         super.viewDidLoad()
-        // Do any additional setup after loading the view.
 
         topTextField.defaultTextAttributes = memeTextAttributes
         bottomTextField.defaultTextAttributes = memeTextAttributes
+
+        memeTextDelegate.postUpdateAction = { self.updateShareButtonState() }
+
         topTextField.delegate = memeTextDelegate
         bottomTextField.delegate = memeTextDelegate
     }
@@ -29,6 +34,7 @@ class ViewController: UIViewController, UIImagePickerControllerDelegate, UINavig
     override func viewWillAppear(_ animated: Bool) {
         super.viewWillAppear(animated)
         cameraButton.isEnabled = UIImagePickerController.isSourceTypeAvailable(.camera)
+        shareButton.isEnabled = false
 
         subscribeToKeyboardNotifications()
     }
@@ -58,6 +64,7 @@ class ViewController: UIViewController, UIImagePickerControllerDelegate, UINavig
 
         if let image = info[.originalImage] as? UIImage {
             imagePickerView.image = image
+            updateShareButtonState()
         }
         picker.dismiss(animated: true, completion: nil)
     }
@@ -75,6 +82,7 @@ class ViewController: UIViewController, UIImagePickerControllerDelegate, UINavig
 
         NotificationCenter.default.addObserver(self, selector: #selector(keyboardWillShow(_:)), name: UIResponder.keyboardWillShowNotification, object: nil)
         NotificationCenter.default.addObserver(self, selector: #selector(keyboardWillHide(_:)), name: UIResponder.keyboardWillHideNotification, object: nil)
+
     }
 
     func unsubscribeFromKeyboardNotifications() {
@@ -86,14 +94,11 @@ class ViewController: UIViewController, UIImagePickerControllerDelegate, UINavig
     @objc func keyboardWillShow(_ notification:Notification) {
 
         if bottomTextField.isEditing {
-            print("Changing height!")
             view.frame.origin.y = -getKeyboardHeight(notification)
         }
     }
 
     @objc func keyboardWillHide(_ notification:Notification) {
-
-        print("Reverting height!")
         view.frame.origin.y = 0
     }
 
@@ -107,6 +112,7 @@ class ViewController: UIViewController, UIImagePickerControllerDelegate, UINavig
     func generateMemedImage() -> UIImage {
 
         // TODO: Hide toolbar and navbar
+        toolbar.isHidden = true
 
         // Render view to an image
         UIGraphicsBeginImageContext(self.view.frame.size)
@@ -115,8 +121,13 @@ class ViewController: UIViewController, UIImagePickerControllerDelegate, UINavig
         UIGraphicsEndImageContext()
 
         // TODO: Show toolbar and navbar
+        toolbar.isHidden = false
 
         return memedImage
+    }
+
+    func updateShareButtonState() {
+        shareButton.isEnabled = topTextField.hasText && bottomTextField.hasText && imagePickerView.image != nil
     }
 }
 

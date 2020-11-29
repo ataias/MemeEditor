@@ -10,8 +10,11 @@ import UIKit
 
 class MyTextFieldDelegate: NSObject, UITextFieldDelegate {
 
+    var postUpdateAction: (() -> Void)?
+
     func textFieldShouldReturn(_ textField: UITextField) -> Bool {
         textField.resignFirstResponder()
+        postUpdateAction?()
         return false
     }
 }

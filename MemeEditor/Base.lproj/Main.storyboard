@@ -34,7 +34,7 @@
                                     </imageView>
                                 </subviews>
                             </stackView>
-                            <toolbar opaque="NO" clearsContextBeforeDrawing="NO" contentMode="scaleToFill" translatesAutoresizingMaskIntoConstraints="NO" id="OY4-30-dsi" userLabel="Bottom Toolbar">
+                            <toolbar opaque="NO" clearsContextBeforeDrawing="NO" contentMode="scaleToFill" translatesAutoresizingMaskIntoConstraints="NO" id="OY4-30-dsi">
                                 <rect key="frame" x="0.0" y="813" width="414" height="49"/>
                                 <items>
                                     <barButtonItem title="Camera" image="camera" catalog="system" id="Mg3-ba-jS2" userLabel="Camera">
@@ -74,6 +74,8 @@
                         <outlet property="bottomTextField" destination="F5T-5T-VKh" id="RC2-Jt-pdy"/>
                         <outlet property="cameraButton" destination="Mg3-ba-jS2" id="xhi-jM-LhH"/>
                         <outlet property="imagePickerView" destination="JJT-iB-9fc" id="6R1-l0-Kx6"/>
+                        <outlet property="shareButton" destination="6S7-xb-ItB" id="UgG-5q-TtH"/>
+                        <outlet property="toolbar" destination="OY4-30-dsi" id="PiM-Ka-iwj"/>
                         <outlet property="topTextField" destination="cOM-zN-T9a" id="hGv-4T-OT8"/>
                     </connections>
                 </viewController>
