@@ -9,15 +9,28 @@ import UIKit
 
 class ViewController: UIViewController, UIImagePickerControllerDelegate, UINavigationControllerDelegate {
 
+    // MARK: IBOutlets
     @IBOutlet weak var imageView: UIImageView!
     @IBOutlet weak var cameraButton: UIBarButtonItem!
     @IBOutlet weak var shareButton: UIBarButtonItem!
     @IBOutlet weak var topTextField: UITextField!
     @IBOutlet weak var bottomTextField: UITextField!
-
     @IBOutlet weak var toolbar: UIToolbar!
 
-    let memeTextDelegate = MyTextFieldDelegate()
+    // MARK: Properties
+
+    let memeTextDelegate = MemeTextFieldDelegate()
+
+    let memeTextAttributes: [NSAttributedString.Key: Any] = [
+        NSAttributedString.Key.strokeColor: UIColor.black,
+        // FIXME this seems to be ignored; the foreground is transparent no matter what I tried and I needed the background color to show the meme text fields properly
+        NSAttributedString.Key.foregroundColor: UIColor.white,
+        NSAttributedString.Key.backgroundColor: UIColor.white,
+        NSAttributedString.Key.font: UIFont(name: "HelveticaNeue-CondensedBlack", size: 40)!,
+        NSAttributedString.Key.strokeWidth:  2
+    ]
+
+    // MARK: Overrides
 
     override func viewDidLoad() {
         super.viewDidLoad()
@@ -28,7 +41,6 @@ class ViewController: UIViewController, UIImagePickerControllerDelegate, UINavig
     }
 
     func configure(textField: UITextField) {
-
         textField.defaultTextAttributes = memeTextAttributes
         textField.delegate = memeTextDelegate
         textField.textAlignment = .center
@@ -49,6 +61,11 @@ class ViewController: UIViewController, UIImagePickerControllerDelegate, UINavig
         unsubscribeFromKeyboardNotifications()
     }
 
+
+
+
+    // MARK: IBActions
+
     @IBAction func pickAnImageFromAlbum(_ sender: Any) {
         pickImage(.photoLibrary)
     }
@@ -57,9 +74,18 @@ class ViewController: UIViewController, UIImagePickerControllerDelegate, UINavig
         pickImage(.camera)
     }
 
+    @IBAction func share() {
+        let image = generateMemedImage()
+
+        let shareController = UIActivityViewController(activityItems: [image], applicationActivities: [])
+        present(shareController, animated: true)
+    }
+
+    // MARK: Image methods
+
     func pickImage(_ sourceType: UIImagePickerController.SourceType) {
         let pickerController = UIImagePickerController()
-        pickerController.allowsEditing = true
+        pickerController.allowsEditing = true // to allow cropping
         pickerController.delegate = self
         pickerController.sourceType = sourceType
         present(pickerController, animated: true, completion: nil)
@@ -75,16 +101,28 @@ class ViewController: UIViewController, UIImagePickerControllerDelegate, UINavig
         picker.dismiss(animated: true, completion: nil)
     }
 
-    // MARK: Text Field
+    /// Generates a meme image with the current view, hiding the toolbar
+    func generateMemedImage() -> UIImage {
 
-    let memeTextAttributes: [NSAttributedString.Key: Any] = [
-        NSAttributedString.Key.strokeColor: UIColor.black,
-        // FIXME this seems to be ignored; the foreground is transparent no matter what I tried and I needed the background color to show the meme text fields properly
-        NSAttributedString.Key.foregroundColor: UIColor.white,
-        NSAttributedString.Key.backgroundColor: UIColor.white,
-        NSAttributedString.Key.font: UIFont(name: "HelveticaNeue-CondensedBlack", size: 40)!,
-        NSAttributedString.Key.strokeWidth:  2
-    ]
+        toolbar.isHidden = true
+
+        // Render view to an image
+        UIGraphicsBeginImageContext(self.view.frame.size)
+        view.drawHierarchy(in: self.view.frame, afterScreenUpdates: true)
+        let memedImage:UIImage = UIGraphicsGetImageFromCurrentImageContext()!
+        UIGraphicsEndImageContext()
+
+        toolbar.isHidden = false
+
+        return memedImage
+    }
+
+    /// Given state in text fields and image view, enables or disables the share button
+    func updateShareButtonState() {
+        shareButton.isEnabled = topTextField.hasText && bottomTextField.hasText && imageView.image != nil
+    }
+
+    // MARK: Keyboard Notifications
 
     func subscribeToKeyboardNotifications() {
 
@@ -116,30 +154,5 @@ class ViewController: UIViewController, UIImagePickerControllerDelegate, UINavig
         return keyboardSize.cgRectValue.height
     }
 
-    func generateMemedImage() -> UIImage {
-
-        toolbar.isHidden = true
-
-        // Render view to an image
-        UIGraphicsBeginImageContext(self.view.frame.size)
-        view.drawHierarchy(in: self.view.frame, afterScreenUpdates: true)
-        let memedImage:UIImage = UIGraphicsGetImageFromCurrentImageContext()!
-        UIGraphicsEndImageContext()
-
-        toolbar.isHidden = false
-
-        return memedImage
-    }
-
-    func updateShareButtonState() {
-        shareButton.isEnabled = topTextField.hasText && bottomTextField.hasText && imageView.image != nil
-    }
-
-    @IBAction func share() {
-        let image = generateMemedImage()
-
-        let shareController = UIActivityViewController(activityItems: [image], applicationActivities: [])
-        present(shareController, animated: true)
-    }
 }
 
