@@ -28,12 +28,10 @@ class ViewController: UIViewController, UIImagePickerControllerDelegate, UINavig
     }
 
     func configure(textField: UITextField) {
+
         textField.defaultTextAttributes = memeTextAttributes
         textField.delegate = memeTextDelegate
         textField.textAlignment = .center
-
-        // TODO although it appears at the front
-        // Easy solution: add background color white to text
         self.view.bringSubviewToFront(textField)
     }
 
@@ -81,9 +79,11 @@ class ViewController: UIViewController, UIImagePickerControllerDelegate, UINavig
 
     let memeTextAttributes: [NSAttributedString.Key: Any] = [
         NSAttributedString.Key.strokeColor: UIColor.black,
+        // FIXME this seems to be ignored; the foreground is transparent no matter what I tried and I needed the background color to show the meme text fields properly
         NSAttributedString.Key.foregroundColor: UIColor.white,
+        NSAttributedString.Key.backgroundColor: UIColor.white,
         NSAttributedString.Key.font: UIFont(name: "HelveticaNeue-CondensedBlack", size: 40)!,
-        NSAttributedString.Key.strokeWidth:  1
+        NSAttributedString.Key.strokeWidth:  2
     ]
 
     func subscribeToKeyboardNotifications() {
