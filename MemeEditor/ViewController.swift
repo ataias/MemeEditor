@@ -21,6 +21,9 @@ class ViewController: UIViewController, UIImagePickerControllerDelegate, UINavig
 
     let memeTextDelegate = MemeTextFieldDelegate()
 
+    // FIXME Meme model was added because it is a requirement of the rubric, but I don't know what to do with it; such model is not used when generating the meme because meme generation just looks at the screen
+    var meme: Meme?
+
     let memeTextAttributes: [NSAttributedString.Key: Any] = [
         NSAttributedString.Key.strokeColor: UIColor.black,
         // FIXME this seems to be ignored; the foreground is transparent no matter what I tried and I needed the background color to show the meme text fields properly
@@ -35,7 +38,7 @@ class ViewController: UIViewController, UIImagePickerControllerDelegate, UINavig
     override func viewDidLoad() {
         super.viewDidLoad()
 
-        memeTextDelegate.postUpdateAction = { self.updateShareButtonState() }
+        memeTextDelegate.postUpdateAction = { self.updateMemeState() }
         configure(textField: topTextField)
         configure(textField: bottomTextField)
     }
@@ -96,7 +99,7 @@ class ViewController: UIViewController, UIImagePickerControllerDelegate, UINavig
 
         if let image = info[.originalImage] as? UIImage {
             imageView.image = image
-            updateShareButtonState()
+            updateMemeState()
         }
         picker.dismiss(animated: true, completion: nil)
     }
@@ -117,9 +120,15 @@ class ViewController: UIViewController, UIImagePickerControllerDelegate, UINavig
         return memedImage
     }
 
-    /// Given state in text fields and image view, enables or disables the share button
-    func updateShareButtonState() {
-        shareButton.isEnabled = topTextField.hasText && bottomTextField.hasText && imageView.image != nil
+    /// Given state in text fields and image view, updates meme state and enables or disables the share button
+    func updateMemeState() {
+        let isMemeComplete = topTextField.hasText && bottomTextField.hasText && imageView.image != nil
+
+        if isMemeComplete {
+            meme = Meme(topText: topTextField.text!, bottomText: bottomTextField.text!, image: imageView.image!)
+        }
+
+        shareButton.isEnabled = isMemeComplete
     }
 
     // MARK: Keyboard Notifications
