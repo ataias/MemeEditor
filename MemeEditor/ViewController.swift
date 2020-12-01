@@ -38,7 +38,9 @@ class ViewController: UIViewController, UIImagePickerControllerDelegate, UINavig
     override func viewDidLoad() {
         super.viewDidLoad()
 
-        memeTextDelegate.postUpdateAction = { self.updateMemeState() }
+        cameraButton.isEnabled = UIImagePickerController.isSourceTypeAvailable(.camera)
+
+        memeTextDelegate.postUpdateAction = { self.updateShareButton() }
         configure(textField: topTextField)
         configure(textField: bottomTextField)
     }
@@ -47,12 +49,11 @@ class ViewController: UIViewController, UIImagePickerControllerDelegate, UINavig
         textField.defaultTextAttributes = memeTextAttributes
         textField.delegate = memeTextDelegate
         textField.textAlignment = .center
-        self.view.bringSubviewToFront(textField)
     }
 
     override func viewWillAppear(_ animated: Bool) {
         super.viewWillAppear(animated)
-        cameraButton.isEnabled = UIImagePickerController.isSourceTypeAvailable(.camera)
+
         shareButton.isEnabled = false
 
         subscribeToKeyboardNotifications()
@@ -63,9 +64,6 @@ class ViewController: UIViewController, UIImagePickerControllerDelegate, UINavig
 
         unsubscribeFromKeyboardNotifications()
     }
-
-
-
 
     // MARK: IBActions
 
@@ -82,6 +80,13 @@ class ViewController: UIViewController, UIImagePickerControllerDelegate, UINavig
 
         let shareController = UIActivityViewController(activityItems: [image], applicationActivities: [])
         present(shareController, animated: true)
+
+        shareController.completionWithItemsHandler = { (activityType, completed, items, error) in
+            if (completed) {
+                self.saveMeme(memeImage: image)
+            }
+            self.dismiss(animated: true, completion: nil)
+        }
     }
 
     // MARK: Image methods
@@ -94,12 +99,11 @@ class ViewController: UIViewController, UIImagePickerControllerDelegate, UINavig
         present(pickerController, animated: true, completion: nil)
     }
 
-
     func imagePickerController(_ picker: UIImagePickerController, didFinishPickingMediaWithInfo info: [UIImagePickerController.InfoKey : Any]) {
 
         if let image = info[.originalImage] as? UIImage {
             imageView.image = image
-            updateMemeState()
+            updateShareButton()
         }
         picker.dismiss(animated: true, completion: nil)
     }
@@ -120,15 +124,14 @@ class ViewController: UIViewController, UIImagePickerControllerDelegate, UINavig
         return memedImage
     }
 
-    /// Given state in text fields and image view, updates meme state and enables or disables the share button
-    func updateMemeState() {
-        let isMemeComplete = topTextField.hasText && bottomTextField.hasText && imageView.image != nil
+    /// Given state in text fields and image view, enables or disables the share button
+    func updateShareButton() {
+        shareButton.isEnabled = topTextField.hasText && bottomTextField.hasText && imageView.image != nil
+    }
 
-        if isMemeComplete {
-            meme = Meme(topText: topTextField.text!, bottomText: bottomTextField.text!, image: imageView.image!)
-        }
-
-        shareButton.isEnabled = isMemeComplete
+    /// Saves meme state if all relevant fields were set
+    func saveMeme(memeImage: UIImage) {
+        meme = Meme(topText: topTextField.text!, bottomText: bottomTextField.text!, original: imageView.image!, memed: memeImage)
     }
 
     // MARK: Keyboard Notifications
