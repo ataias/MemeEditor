@@ -1,5 +1,5 @@
 //
-//  ViewController.swift
+//  CreateMemeVC.swift
 //  MemeEditor
 //
 //  Created by Ataias Pereira Reis on 27/11/20.
@@ -7,7 +7,7 @@
 
 import UIKit
 
-class ViewController: UIViewController, UIImagePickerControllerDelegate, UINavigationControllerDelegate {
+class CreateMemeVC: UIViewController, UIImagePickerControllerDelegate, UINavigationControllerDelegate {
 
     // MARK: IBOutlets
     @IBOutlet weak var imageView: UIImageView!
