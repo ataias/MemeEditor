@@ -26,11 +26,9 @@ class CreateMemeVC: UIViewController, UIImagePickerControllerDelegate, UINavigat
 
     let memeTextAttributes: [NSAttributedString.Key: Any] = [
         NSAttributedString.Key.strokeColor: UIColor.black,
-        // FIXME this seems to be ignored; the foreground is transparent no matter what I tried and I needed the background color to show the meme text fields properly
         NSAttributedString.Key.foregroundColor: UIColor.white,
-        NSAttributedString.Key.backgroundColor: UIColor.white,
         NSAttributedString.Key.font: UIFont(name: "HelveticaNeue-CondensedBlack", size: 40)!,
-        NSAttributedString.Key.strokeWidth:  2
+        NSAttributedString.Key.strokeWidth:  -3.0 // if positive, foreground is ignored! check docs
     ]
 
     // MARK: Overrides
