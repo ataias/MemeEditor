@@ -10,6 +10,7 @@ import UIKit
 class MemeTableVC: UIViewController, UITableViewDelegate, UITableViewDataSource {
 
     var memes = [Meme]()
+    @IBOutlet weak var tableView: UITableView!
 
     func tableView(_ tableView: UITableView, numberOfRowsInSection section: Int) -> Int {
         return memes.count
@@ -47,6 +48,7 @@ class MemeTableVC: UIViewController, UITableViewDelegate, UITableViewDataSource 
 
         let appDelegate = UIApplication.shared.delegate as! AppDelegate
         memes = appDelegate.memes
+        tableView.reloadData()
     }
     
 
