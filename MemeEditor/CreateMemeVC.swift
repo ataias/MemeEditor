@@ -79,6 +79,7 @@ class CreateMemeVC: UIViewController, UIImagePickerControllerDelegate, UINavigat
         shareController.completionWithItemsHandler = { (activityType, completed, items, error) in
             if (completed) {
                 self.saveMeme(memeImage: image)
+                self.navigationController?.popToRootViewController(animated: true)
             }
             self.dismiss(animated: true, completion: nil)
         }
