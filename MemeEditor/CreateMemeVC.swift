@@ -21,9 +21,6 @@ class CreateMemeVC: UIViewController, UIImagePickerControllerDelegate, UINavigat
 
     let memeTextDelegate = MemeTextFieldDelegate()
 
-    // FIXME Meme model was added because it is a requirement of the rubric, but I don't know what to do with it; such model is not used when generating the meme because meme generation just looks at the screen
-    var meme: Meme?
-
     let memeTextAttributes: [NSAttributedString.Key: Any] = [
         NSAttributedString.Key.strokeColor: UIColor.black,
         NSAttributedString.Key.foregroundColor: UIColor.white,
@@ -129,7 +126,9 @@ class CreateMemeVC: UIViewController, UIImagePickerControllerDelegate, UINavigat
 
     /// Saves meme state if all relevant fields were set
     func saveMeme(memeImage: UIImage) {
-        meme = Meme(topText: topTextField.text!, bottomText: bottomTextField.text!, original: imageView.image!, memed: memeImage)
+        let meme = Meme(topText: topTextField.text!, bottomText: bottomTextField.text!, original: imageView.image!, memed: memeImage)
+        let appDelegate = UIApplication.shared.delegate as! AppDelegate
+        appDelegate.memes.append(meme)
     }
 
     // MARK: Keyboard Notifications
