@@ -130,6 +130,7 @@ class CreateMemeVC: UIViewController, UIImagePickerControllerDelegate, UINavigat
         let meme = Meme(topText: topTextField.text!, bottomText: bottomTextField.text!, original: imageView.image!, memed: memeImage)
         let appDelegate = UIApplication.shared.delegate as! AppDelegate
         appDelegate.memes.append(meme)
+        try! FileManager.save(appDelegate.memes)
     }
 
     // MARK: Keyboard Notifications

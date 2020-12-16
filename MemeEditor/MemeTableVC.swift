@@ -12,7 +12,6 @@ class MemeTableVC: UIViewController, UITableViewDelegate, UITableViewDataSource 
     var memes = [Meme]()
 
     func tableView(_ tableView: UITableView, numberOfRowsInSection section: Int) -> Int {
-        print("Called!")
         return memes.count
     }
 
