@@ -22,7 +22,9 @@ class MemeCollectionVC: UIViewController, UICollectionViewDelegate, UICollection
         let meme = memes[(indexPath as NSIndexPath).row]
 
         cell.textLabel.text = meme.topText
+        // FIXME: Can I avoid specifying the width/height of the image on the storyboard? I tried, expecting the image would just stretch as much as possible to fit with their own aspect ration, but no matter what I tried the image just disappeared. The example on BondVillains also hard codes the size.
         cell.imageView.image = meme.memed.image
+        cell.layer.borderWidth = 0.5
 
         return cell
     }
