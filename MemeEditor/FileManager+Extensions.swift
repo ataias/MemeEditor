@@ -15,8 +15,6 @@ extension FileManager {
         return paths[0]
     }
 
-    static let dataFile = FileManager.documentsDirectory.appendingPathComponent("memeData.json")
-
     static func decode<T: Codable>(_ url: URL) -> T? {
 
         if !FileManager.default.fileExists(atPath: url.path) {
@@ -36,10 +34,25 @@ extension FileManager {
         return loaded
     }
 
+    /// Reads all files at path as "Element"
+    static func decodeArray<Element: Codable>(at url: URL) throws -> [Element]  {
+        let manager = FileManager.default
+        let files = try manager.contentsOfDirectory(at: url, includingPropertiesForKeys: nil)
+        return files.compactMap { decode($0) }
+    }
 
-    static func save<T: Codable>(_ toSave: T) throws {
+    static func jsonPath<T: Identifiable>(_ data: T) -> URL {
+        FileManager.documentsDirectory.appendingPathComponent("\(data.id).json")
+    }
+
+
+    static func save<T: Codable>(_ toSave: T) throws where T: Identifiable {
         let data = try JSONEncoder().encode(toSave)
-        try data.write(to: dataFile, options: [.atomicWrite])
+        try data.write(to: jsonPath(toSave))
+    }
+
+    static func removeJson<T: Identifiable>(_ toRemove: T) throws {
+        try FileManager.default.removeItem(at: jsonPath(toRemove))
     }
 
 }

@@ -289,6 +289,7 @@
                     </view>
                     <navigationItem key="navigationItem" id="tVU-hw-AEv"/>
                     <connections>
+                        <outlet property="albumButton" destination="GHp-8B-bgm" id="xnd-va-mS4"/>
                         <outlet property="bottomTextField" destination="F5T-5T-VKh" id="RC2-Jt-pdy"/>
                         <outlet property="cameraButton" destination="Mg3-ba-jS2" id="xhi-jM-LhH"/>
                         <outlet property="imageView" destination="JJT-iB-9fc" id="6R1-l0-Kx6"/>

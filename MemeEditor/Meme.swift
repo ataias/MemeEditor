@@ -7,12 +7,18 @@
 
 import Foundation
 import UIKit
+import CryptoKit
 
-struct Meme: Codable {
+struct Meme: Codable, Equatable, Identifiable {
+    var id = Date()
     let topText: String
     let bottomText: String
     let original: UIImageD
     let memed: UIImageD
+
+    static func == (lhs: Meme, rhs: Meme) -> Bool {
+        return lhs.topText == rhs.topText && lhs.bottomText == rhs.bottomText && lhs.original == rhs.original
+    }
 }
 
 extension Meme {
@@ -21,7 +27,7 @@ extension Meme {
     }
 }
 
-struct UIImageD: Codable {
+struct UIImageD: Codable, Equatable {
     let image: UIImage
 
     init(from decoder: Decoder) throws {

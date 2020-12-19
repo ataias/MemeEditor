@@ -33,6 +33,7 @@ class MemeTableVC: UIViewController, UITableViewDelegate, UITableViewDataSource 
 
     func tableView(_ tableView: UITableView, didSelectRowAt indexPath: IndexPath) {
         let detail = self.memes[indexPath.row]
+        // TODO change the next VC by a view only one; add an option to launch CreateMemeVC from it (or maybe just disable editing?)
         let detailVC = self.storyboard!.instantiateViewController(withIdentifier: "CreateMemeView") as! CreateMemeVC
         detailVC.meme = detail
         self.navigationController!.pushViewController(detailVC, animated: true)
@@ -44,8 +45,9 @@ class MemeTableVC: UIViewController, UITableViewDelegate, UITableViewDataSource 
             title: "Delete"
         ) { (action, sourceView, completionHandler) in
             let appDelegate = UIApplication.shared.delegate as! AppDelegate
+            let meme = appDelegate.memes[indexPath.row]
+            try! FileManager.removeJson(meme)
             appDelegate.memes.remove(at: indexPath.row)
-            try! FileManager.save(appDelegate.memes)
             self.updateMemes()
         }
 

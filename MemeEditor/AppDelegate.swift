@@ -10,7 +10,7 @@ import UIKit
 @main
 class AppDelegate: UIResponder, UIApplicationDelegate {
 
-    var memes = FileManager.decode(FileManager.dataFile) ?? [Meme]()
+    var memes: [Meme] = try! FileManager.decodeArray(at: FileManager.documentsDirectory)
 
     func application(_ application: UIApplication, didFinishLaunchingWithOptions launchOptions: [UIApplication.LaunchOptionsKey: Any]?) -> Bool {
         // Override point for customization after application launch.

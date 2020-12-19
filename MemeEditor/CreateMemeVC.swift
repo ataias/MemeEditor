@@ -12,6 +12,7 @@ class CreateMemeVC: UIViewController, UIImagePickerControllerDelegate, UINavigat
     // MARK: IBOutlets
     @IBOutlet weak var imageView: UIImageView!
     @IBOutlet weak var cameraButton: UIBarButtonItem!
+    @IBOutlet weak var albumButton: UIBarButtonItem!
     @IBOutlet weak var shareButton: UIBarButtonItem!
     @IBOutlet weak var topTextField: UITextField!
     @IBOutlet weak var bottomTextField: UITextField!
@@ -30,6 +31,19 @@ class CreateMemeVC: UIViewController, UIImagePickerControllerDelegate, UINavigat
 
     var meme: Meme?
 
+    var isEditable: Bool {
+        get {
+            return topTextField.isEnabled
+        }
+        set {
+            topTextField.isEnabled = newValue
+            bottomTextField.isEnabled = newValue
+            cameraButton.isEnabled = newValue
+            albumButton.isEnabled = newValue
+
+        }
+    }
+
     // MARK: Overrides
 
     override func viewDidLoad() {
@@ -45,6 +59,8 @@ class CreateMemeVC: UIViewController, UIImagePickerControllerDelegate, UINavigat
             self.topTextField.text = meme.topText
             self.imageView.image = meme.original.image
             self.bottomTextField.text = meme.bottomText
+
+            self.isEditable = false
         }
     }
 
@@ -137,9 +153,14 @@ class CreateMemeVC: UIViewController, UIImagePickerControllerDelegate, UINavigat
     func saveMeme(memeImage: UIImage) {
         let meme = Meme(topText: topTextField.text!, bottomText: bottomTextField.text!, original: imageView.image!, memed: memeImage)
         self.meme = meme
+
         let appDelegate = UIApplication.shared.delegate as! AppDelegate
-        appDelegate.memes.append(meme)
-        try! FileManager.save(appDelegate.memes)
+
+        // Only save if the meme does not exist already
+        if !appDelegate.memes.contains(meme) {
+            appDelegate.memes.append(meme)
+            try! FileManager.save(meme)
+        }
     }
 
     // MARK: Keyboard Notifications
