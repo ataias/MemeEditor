@@ -38,6 +38,20 @@ class MemeTableVC: UIViewController, UITableViewDelegate, UITableViewDataSource 
         self.navigationController!.pushViewController(detailVC, animated: true)
     }
 
+    func tableView(_ tableView: UITableView, trailingSwipeActionsConfigurationForRowAt indexPath: IndexPath) -> UISwipeActionsConfiguration? {
+        let delete = UIContextualAction(
+            style: .destructive,
+            title: "Delete"
+        ) { (action, sourceView, completionHandler) in
+            let appDelegate = UIApplication.shared.delegate as! AppDelegate
+            appDelegate.memes.remove(at: indexPath.row)
+            try! FileManager.save(appDelegate.memes)
+            self.updateMemes()
+        }
+
+        return UISwipeActionsConfiguration(actions: [delete])
+    }
+
     override func viewDidLoad() {
         super.viewDidLoad()
         tableView.delegate = self
@@ -45,7 +59,10 @@ class MemeTableVC: UIViewController, UITableViewDelegate, UITableViewDataSource 
 
     override func viewWillAppear(_ animated: Bool) {
         super.viewWillAppear(animated)
+        updateMemes()
+    }
 
+    func updateMemes() {
         let appDelegate = UIApplication.shared.delegate as! AppDelegate
         memes = appDelegate.memes
         tableView.reloadData()
