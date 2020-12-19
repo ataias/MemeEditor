@@ -29,6 +29,13 @@ class MemeCollectionVC: UIViewController, UICollectionViewDelegate, UICollection
         return cell
     }
 
+    func collectionView(_ collectionView: UICollectionView, didSelectItemAt indexPath: IndexPath) {
+        let detail = self.memes[indexPath.row]
+        let detailVC = self.storyboard!.instantiateViewController(withIdentifier: "CreateMemeView") as! CreateMemeVC
+        detailVC.meme = detail
+        self.navigationController!.pushViewController(detailVC, animated: true)
+    }
+
 
     override func viewDidLoad() {
         super.viewDidLoad()
@@ -39,6 +46,8 @@ class MemeCollectionVC: UIViewController, UICollectionViewDelegate, UICollection
         flowLayout.minimumInteritemSpacing = space
         flowLayout.minimumLineSpacing = space
         flowLayout.itemSize = CGSize(width: dimension, height: dimension)
+
+        collectionView.delegate = self
 
     }
 
