@@ -18,6 +18,8 @@ class CreateMemeVC: UIViewController, UIImagePickerControllerDelegate, UINavigat
     @IBOutlet weak var bottomTextField: UITextField!
     @IBOutlet weak var toolbar: UIToolbar!
 
+    @IBOutlet weak var editButton: UIBarButtonItem!
+
     // MARK: Properties
 
     let memeTextDelegate = MemeTextFieldDelegate()
@@ -38,8 +40,11 @@ class CreateMemeVC: UIViewController, UIImagePickerControllerDelegate, UINavigat
         set {
             topTextField.isEnabled = newValue
             bottomTextField.isEnabled = newValue
-            cameraButton.isEnabled = newValue
+            cameraButton.isEnabled = newValue && UIImagePickerController.isSourceTypeAvailable(.camera)
             albumButton.isEnabled = newValue
+
+            editButton.isEnabled = !newValue
+            editButton.tintColor = !newValue ? UIColor.systemBlue : UIColor.clear
 
         }
     }
@@ -107,6 +112,10 @@ class CreateMemeVC: UIViewController, UIImagePickerControllerDelegate, UINavigat
             }
             self.dismiss(animated: true, completion: nil)
         }
+    }
+
+    @IBAction func enableEditing() {
+        isEditable = true
     }
 
     // MARK: Image methods

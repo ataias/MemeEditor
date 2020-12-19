@@ -287,11 +287,18 @@
                             <constraint firstItem="l0u-Hb-3mT" firstAttribute="top" secondItem="6Tk-OE-BBY" secondAttribute="top" id="xWf-g6-Ghb"/>
                         </constraints>
                     </view>
-                    <navigationItem key="navigationItem" id="tVU-hw-AEv"/>
+                    <navigationItem key="navigationItem" id="tVU-hw-AEv">
+                        <barButtonItem key="rightBarButtonItem" title="Edit" id="a7N-wk-H58">
+                            <connections>
+                                <action selector="enableEditing" destination="BYZ-38-t0r" id="QCs-cP-D6I"/>
+                            </connections>
+                        </barButtonItem>
+                    </navigationItem>
                     <connections>
                         <outlet property="albumButton" destination="GHp-8B-bgm" id="xnd-va-mS4"/>
                         <outlet property="bottomTextField" destination="F5T-5T-VKh" id="RC2-Jt-pdy"/>
                         <outlet property="cameraButton" destination="Mg3-ba-jS2" id="xhi-jM-LhH"/>
+                        <outlet property="editButton" destination="a7N-wk-H58" id="ESE-Fx-PoY"/>
                         <outlet property="imageView" destination="JJT-iB-9fc" id="6R1-l0-Kx6"/>
                         <outlet property="shareButton" destination="6S7-xb-ItB" id="UgG-5q-TtH"/>
                         <outlet property="toolbar" destination="OY4-30-dsi" id="PiM-Ka-iwj"/>
