@@ -28,6 +28,8 @@ class CreateMemeVC: UIViewController, UIImagePickerControllerDelegate, UINavigat
         NSAttributedString.Key.strokeWidth:  -3.0 // if positive, foreground is ignored! check docs
     ]
 
+    var meme: Meme?
+
     // MARK: Overrides
 
     override func viewDidLoad() {
@@ -38,6 +40,12 @@ class CreateMemeVC: UIViewController, UIImagePickerControllerDelegate, UINavigat
         memeTextDelegate.postUpdateAction = { self.updateShareButton() }
         configure(textField: topTextField)
         configure(textField: bottomTextField)
+
+        if let meme = meme {
+            self.topTextField.text = meme.topText
+            self.imageView.image = meme.original.image
+            self.bottomTextField.text = meme.bottomText
+        }
     }
 
     func configure(textField: UITextField) {
@@ -49,7 +57,7 @@ class CreateMemeVC: UIViewController, UIImagePickerControllerDelegate, UINavigat
     override func viewWillAppear(_ animated: Bool) {
         super.viewWillAppear(animated)
 
-        shareButton.isEnabled = false
+        self.updateShareButton()
 
         subscribeToKeyboardNotifications()
     }
@@ -128,6 +136,7 @@ class CreateMemeVC: UIViewController, UIImagePickerControllerDelegate, UINavigat
     /// Saves meme state if all relevant fields were set
     func saveMeme(memeImage: UIImage) {
         let meme = Meme(topText: topTextField.text!, bottomText: bottomTextField.text!, original: imageView.image!, memed: memeImage)
+        self.meme = meme
         let appDelegate = UIApplication.shared.delegate as! AppDelegate
         appDelegate.memes.append(meme)
         try! FileManager.save(appDelegate.memes)

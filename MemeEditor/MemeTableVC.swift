@@ -32,15 +32,15 @@ class MemeTableVC: UIViewController, UITableViewDelegate, UITableViewDataSource 
     }
 
     func tableView(_ tableView: UITableView, didSelectRowAt indexPath: IndexPath) {
-
-        // TODO show a detail view
-//        let detailController = self.storyboard!.instantiateViewController(withIdentifier: "VillainDetailViewController") as! VillainDetailViewController
-//        detailController.villain = self.allVillains[(indexPath as NSIndexPath).row]
-//        self.navigationController!.pushViewController(detailController, animated: true)
+        let detail = self.memes[indexPath.row]
+        let detailVC = self.storyboard!.instantiateViewController(withIdentifier: "CreateMemeView") as! CreateMemeVC
+        detailVC.meme = detail
+        self.navigationController!.pushViewController(detailVC, animated: true)
     }
 
     override func viewDidLoad() {
         super.viewDidLoad()
+        tableView.delegate = self
     }
 
     override func viewWillAppear(_ animated: Bool) {
