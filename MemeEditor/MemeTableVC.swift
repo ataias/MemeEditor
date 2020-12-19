@@ -33,7 +33,6 @@ class MemeTableVC: UIViewController, UITableViewDelegate, UITableViewDataSource 
 
     func tableView(_ tableView: UITableView, didSelectRowAt indexPath: IndexPath) {
         let detail = self.memes[indexPath.row]
-        // TODO change the next VC by a view only one; add an option to launch CreateMemeVC from it (or maybe just disable editing?)
         let detailVC = self.storyboard!.instantiateViewController(withIdentifier: "CreateMemeView") as! CreateMemeVC
         detailVC.meme = detail
         self.navigationController!.pushViewController(detailVC, animated: true)
