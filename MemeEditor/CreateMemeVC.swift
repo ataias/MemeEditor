@@ -24,13 +24,6 @@ class CreateMemeVC: UIViewController, UIImagePickerControllerDelegate, UINavigat
 
     let memeTextDelegate = MemeTextFieldDelegate()
 
-    let memeTextAttributes: [NSAttributedString.Key: Any] = [
-        NSAttributedString.Key.strokeColor: UIColor.black,
-        NSAttributedString.Key.foregroundColor: UIColor.white,
-        NSAttributedString.Key.font: UIFont(name: "Impact", size: 40)!,
-        NSAttributedString.Key.strokeWidth:  -3.0 // if positive, foreground is ignored! check docs
-    ]
-
     var meme: Meme?
 
     var isEditable: Bool {
@@ -57,8 +50,8 @@ class CreateMemeVC: UIViewController, UIImagePickerControllerDelegate, UINavigat
         cameraButton.isEnabled = UIImagePickerController.isSourceTypeAvailable(.camera)
 
         memeTextDelegate.postUpdateAction = { self.updateShareButton() }
-        configure(textField: topTextField)
-        configure(textField: bottomTextField)
+        topTextField.applyMemeStyle(delegate: memeTextDelegate)
+        bottomTextField.applyMemeStyle(delegate: memeTextDelegate)
 
         if let meme = meme {
             self.topTextField.text = meme.topText
@@ -67,12 +60,6 @@ class CreateMemeVC: UIViewController, UIImagePickerControllerDelegate, UINavigat
 
             self.isEditable = false
         }
-    }
-
-    func configure(textField: UITextField) {
-        textField.defaultTextAttributes = memeTextAttributes
-        textField.delegate = memeTextDelegate
-        textField.textAlignment = .center
     }
 
     override func viewWillAppear(_ animated: Bool) {

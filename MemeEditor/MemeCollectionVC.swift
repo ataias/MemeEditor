@@ -31,7 +31,7 @@ class MemeCollectionVC: UIViewController, UICollectionViewDelegate, UICollection
 
     func collectionView(_ collectionView: UICollectionView, didSelectItemAt indexPath: IndexPath) {
         let detail = self.memes[indexPath.row]
-        let detailVC = self.storyboard!.instantiateViewController(withIdentifier: "CreateMemeView") as! CreateMemeVC
+        let detailVC = self.storyboard!.instantiateViewController(withIdentifier: "DetailMemeView") as! DetailMemeViewViewController
         detailVC.meme = detail
         self.navigationController!.pushViewController(detailVC, animated: true)
     }

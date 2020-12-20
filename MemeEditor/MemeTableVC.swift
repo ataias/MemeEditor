@@ -33,7 +33,7 @@ class MemeTableVC: UIViewController, UITableViewDelegate, UITableViewDataSource 
 
     func tableView(_ tableView: UITableView, didSelectRowAt indexPath: IndexPath) {
         let detail = self.memes[indexPath.row]
-        let detailVC = self.storyboard!.instantiateViewController(withIdentifier: "CreateMemeView") as! CreateMemeVC
+        let detailVC = self.storyboard!.instantiateViewController(withIdentifier: "DetailMemeView") as! DetailMemeViewViewController
         detailVC.meme = detail
         self.navigationController!.pushViewController(detailVC, animated: true)
     }
