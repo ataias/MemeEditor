@@ -32,5 +32,11 @@ class DetailMemeViewViewController: UIViewController {
     }
 
     // MARK: Actions
-    
+    // TODO share button
+
+    @IBAction func edit() {
+        let createVC = self.storyboard!.instantiateViewController(withIdentifier: "CreateMemeView") as! CreateMemeVC
+        createVC.meme = meme
+        self.navigationController!.pushViewController(createVC, animated: true)
+    }
 }

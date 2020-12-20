@@ -263,7 +263,11 @@
                         </constraints>
                     </view>
                     <navigationItem key="navigationItem" id="fRx-SW-x4x">
-                        <barButtonItem key="rightBarButtonItem" title="Edit" id="pAC-gW-nkg"/>
+                        <barButtonItem key="rightBarButtonItem" title="Edit" id="pAC-gW-nkg">
+                            <connections>
+                                <action selector="edit" destination="teZ-Ri-Kbk" id="ow5-Cw-fbd"/>
+                            </connections>
+                        </barButtonItem>
                     </navigationItem>
                     <connections>
                         <outlet property="bottomTextField" destination="Ddb-F0-Oer" id="Ljg-6d-xwU"/>
