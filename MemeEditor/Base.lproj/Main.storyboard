@@ -117,12 +117,16 @@
                         </constraints>
                     </view>
                     <navigationItem key="navigationItem" id="fjZ-eG-yh8">
-                        <barButtonItem key="rightBarButtonItem" image="plus" catalog="system" id="JDC-21-YLv"/>
+                        <barButtonItem key="rightBarButtonItem" image="plus" catalog="system" id="JDC-21-YLv">
+                            <connections>
+                                <segue destination="J4i-XS-llt" kind="show" id="RGj-co-N5Z"/>
+                            </connections>
+                        </barButtonItem>
                     </navigationItem>
                     <connections>
                         <outlet property="collectionView" destination="ysG-S6-nOD" id="YRP-R0-tfY"/>
                         <outlet property="flowLayout" destination="bnL-HQ-aMv" id="wRj-ja-a3X"/>
-                        <segue destination="teZ-Ri-Kbk" kind="show" id="LFe-Ej-CMn"/>
+                        <segue destination="teZ-Ri-Kbk" kind="show" identifier="MemeCollectionToDetail" id="LFe-Ej-CMn"/>
                     </connections>
                 </viewController>
                 <placeholder placeholderIdentifier="IBFirstResponder" id="q05-cR-vAb" userLabel="First Responder" customClass="UIResponder" sceneMemberID="firstResponder"/>
@@ -202,11 +206,15 @@
                         </constraints>
                     </view>
                     <navigationItem key="navigationItem" id="3HU-rx-G7o">
-                        <barButtonItem key="rightBarButtonItem" image="plus" catalog="system" id="pRv-as-knv"/>
+                        <barButtonItem key="rightBarButtonItem" image="plus" catalog="system" id="pRv-as-knv">
+                            <connections>
+                                <segue destination="J4i-XS-llt" kind="show" id="zPS-pu-9Jo"/>
+                            </connections>
+                        </barButtonItem>
                     </navigationItem>
                     <connections>
                         <outlet property="tableView" destination="6uZ-k8-5DW" id="EaY-Y3-K44"/>
-                        <segue destination="teZ-Ri-Kbk" kind="show" id="wgz-EF-atc"/>
+                        <segue destination="teZ-Ri-Kbk" kind="show" identifier="MemeTableToDetail" id="wgz-EF-atc"/>
                     </connections>
                 </viewController>
                 <placeholder placeholderIdentifier="IBFirstResponder" id="9tg-ay-QYk" userLabel="First Responder" customClass="UIResponder" sceneMemberID="firstResponder"/>
@@ -225,13 +233,13 @@
                                 <rect key="frame" x="0.0" y="88" width="414" height="725"/>
                             </imageView>
                             <textField contentMode="center" contentHorizontalAlignment="center" contentVerticalAlignment="center" placeholder="TOP MESSAGE" textAlignment="center" minimumFontSize="17" translatesAutoresizingMaskIntoConstraints="NO" id="JOB-4o-Wwp" userLabel="Top Text Field">
-                                <rect key="frame" x="10" y="128" width="394" height="50.5"/>
+                                <rect key="frame" x="10" y="128" width="394" height="39"/>
                                 <color key="textColor" white="1" alpha="1" colorSpace="custom" customColorSpace="genericGamma22GrayColorSpace"/>
                                 <fontDescription key="fontDescription" name="Impact" family="Impact" pointSize="40"/>
                                 <textInputTraits key="textInputTraits" autocapitalizationType="allCharacters" autocorrectionType="no"/>
                             </textField>
                             <textField contentMode="center" contentHorizontalAlignment="center" contentVerticalAlignment="center" placeholder="BOTTOM MESSAGE" textAlignment="center" minimumFontSize="17" translatesAutoresizingMaskIntoConstraints="NO" id="Ddb-F0-Oer" userLabel="Bottom Text Field">
-                                <rect key="frame" x="10" y="692.5" width="394" height="50.5"/>
+                                <rect key="frame" x="10" y="704" width="394" height="39"/>
                                 <color key="textColor" white="1" alpha="1" colorSpace="custom" customColorSpace="genericGamma22GrayColorSpace"/>
                                 <fontDescription key="fontDescription" name="Impact" family="Impact" pointSize="40"/>
                                 <textInputTraits key="textInputTraits" autocapitalizationType="allCharacters"/>
@@ -273,7 +281,7 @@
                         <outlet property="bottomTextField" destination="Ddb-F0-Oer" id="Ljg-6d-xwU"/>
                         <outlet property="imageView" destination="D80-gZ-Qhi" id="fBz-kL-WJX"/>
                         <outlet property="topTextField" destination="JOB-4o-Wwp" id="u7N-Iy-BaL"/>
-                        <segue destination="J4i-XS-llt" kind="show" id="B7o-Sr-drW"/>
+                        <segue destination="J4i-XS-llt" kind="show" identifier="DetailToEdit" id="B7o-Sr-drW"/>
                     </connections>
                 </viewController>
                 <placeholder placeholderIdentifier="IBFirstResponder" id="CnP-Ty-xWH" userLabel="First Responder" customClass="UIResponder" sceneMemberID="firstResponder"/>
@@ -297,13 +305,13 @@
                                 </subviews>
                             </stackView>
                             <textField contentMode="center" contentHorizontalAlignment="center" contentVerticalAlignment="center" placeholder="TOP MESSAGE" textAlignment="center" minimumFontSize="17" translatesAutoresizingMaskIntoConstraints="NO" id="fvr-gL-p4t" userLabel="Top Text Field">
-                                <rect key="frame" x="10" y="128" width="394" height="50.5"/>
+                                <rect key="frame" x="10" y="128" width="394" height="39"/>
                                 <color key="textColor" white="1" alpha="1" colorSpace="custom" customColorSpace="genericGamma22GrayColorSpace"/>
                                 <fontDescription key="fontDescription" name="Impact" family="Impact" pointSize="40"/>
                                 <textInputTraits key="textInputTraits" autocapitalizationType="allCharacters" autocorrectionType="no"/>
                             </textField>
                             <textField contentMode="center" contentHorizontalAlignment="center" contentVerticalAlignment="center" placeholder="BOTTOM MESSAGE" textAlignment="center" minimumFontSize="17" translatesAutoresizingMaskIntoConstraints="NO" id="SIY-EI-SEt" userLabel="Bottom Text Field">
-                                <rect key="frame" x="10" y="692.5" width="394" height="50.5"/>
+                                <rect key="frame" x="10" y="704" width="394" height="39"/>
                                 <color key="textColor" white="1" alpha="1" colorSpace="custom" customColorSpace="genericGamma22GrayColorSpace"/>
                                 <fontDescription key="fontDescription" name="Impact" family="Impact" pointSize="40"/>
                                 <textInputTraits key="textInputTraits" autocapitalizationType="allCharacters"/>
@@ -348,11 +356,18 @@
                             <constraint firstItem="S6g-pq-fX7" firstAttribute="trailing" secondItem="SIY-EI-SEt" secondAttribute="trailing" constant="10" id="ym8-TG-p8r"/>
                         </constraints>
                     </view>
-                    <navigationItem key="navigationItem" id="Y0o-UP-657"/>
+                    <navigationItem key="navigationItem" id="Y0o-UP-657">
+                        <barButtonItem key="rightBarButtonItem" title="Done" id="c2F-pb-6cr">
+                            <connections>
+                                <action selector="saveEdit" destination="J4i-XS-llt" id="2sA-Gx-asC"/>
+                            </connections>
+                        </barButtonItem>
+                    </navigationItem>
                     <connections>
                         <outlet property="albumButton" destination="oHk-Yp-Bqh" id="wPk-d3-wnL"/>
                         <outlet property="bottomTextField" destination="SIY-EI-SEt" id="4qK-V1-inb"/>
                         <outlet property="cameraButton" destination="V9d-0h-Hfn" id="MRE-Cm-4Ey"/>
+                        <outlet property="finishEditingButton" destination="c2F-pb-6cr" id="Hss-lK-qeJ"/>
                         <outlet property="imageView" destination="ZpD-KJ-Ucd" id="FB6-Md-noR"/>
                         <outlet property="shareButton" destination="k7b-Uv-51Q" id="0xn-gc-bmt"/>
                         <outlet property="toolbar" destination="Oah-35-VwJ" id="9EZ-bY-xKO"/>
@@ -365,6 +380,7 @@
         </scene>
     </scenes>
     <inferredMetricsTieBreakers>
+        <segue reference="B7o-Sr-drW"/>
         <segue reference="wgz-EF-atc"/>
     </inferredMetricsTieBreakers>
     <resources>

@@ -32,11 +32,25 @@ class DetailMemeViewViewController: UIViewController {
     }
 
     // MARK: Actions
-    // TODO share button
+    @IBAction func share() {
+        let image = meme.memed.image
+
+        let shareController = UIActivityViewController(activityItems: [image], applicationActivities: [])
+        present(shareController, animated: true)
+
+        shareController.completionWithItemsHandler = { (activityType, completed, items, error) in
+            self.dismiss(animated: true, completion: nil)
+        }
+
+    }
 
     @IBAction func edit() {
         let createVC = self.storyboard!.instantiateViewController(withIdentifier: "CreateMemeView") as! CreateMemeVC
         createVC.meme = meme
-        self.navigationController!.pushViewController(createVC, animated: true)
+        createVC.isEditMode = true
+
+        // QUESTION: When I set animated = true, I see on the simulator a temporary black block on the right of the screen. How would I fix it if I wanted this animated?
+        // FWIW: I liked it non-animated better, but would like to understand the problem
+        self.navigationController!.pushViewController(createVC, animated: false)
     }
 }

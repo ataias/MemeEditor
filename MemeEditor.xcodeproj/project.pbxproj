@@ -9,6 +9,7 @@
 /* Begin PBXBuildFile section */
 		422E5B57258B52A400AB24CE /* MemeCollectionVC.swift in Sources */ = {isa = PBXBuildFile; fileRef = 422E5B56258B52A400AB24CE /* MemeCollectionVC.swift */; };
 		422E5B5A258B535C00AB24CE /* MemeCollectionViewCell.swift in Sources */ = {isa = PBXBuildFile; fileRef = 422E5B59258B535C00AB24CE /* MemeCollectionViewCell.swift */; };
+		42486B6E25909EC4006453B9 /* UIBarButtonItem+Extensions.swift in Sources */ = {isa = PBXBuildFile; fileRef = 42486B6D25909EC4006453B9 /* UIBarButtonItem+Extensions.swift */; };
 		424D8D78259000B200C33093 /* DetailMemeViewViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = 424D8D77259000B200C33093 /* DetailMemeViewViewController.swift */; };
 		424D8D7C2590059D00C33093 /* UITextField+Extensions.swift in Sources */ = {isa = PBXBuildFile; fileRef = 424D8D7B2590059D00C33093 /* UITextField+Extensions.swift */; };
 		42567A1625729BF6009D4B5E /* MemeTextFieldDelegate.swift in Sources */ = {isa = PBXBuildFile; fileRef = 42567A1525729BF6009D4B5E /* MemeTextFieldDelegate.swift */; };
@@ -29,6 +30,7 @@
 /* Begin PBXFileReference section */
 		422E5B56258B52A400AB24CE /* MemeCollectionVC.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = MemeCollectionVC.swift; sourceTree = "<group>"; };
 		422E5B59258B535C00AB24CE /* MemeCollectionViewCell.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = MemeCollectionViewCell.swift; sourceTree = "<group>"; };
+		42486B6D25909EC4006453B9 /* UIBarButtonItem+Extensions.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = "UIBarButtonItem+Extensions.swift"; sourceTree = "<group>"; };
 		424D8D77259000B200C33093 /* DetailMemeViewViewController.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = DetailMemeViewViewController.swift; sourceTree = "<group>"; };
 		424D8D7B2590059D00C33093 /* UITextField+Extensions.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = "UITextField+Extensions.swift"; sourceTree = "<group>"; };
 		42567A1525729BF6009D4B5E /* MemeTextFieldDelegate.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = MemeTextFieldDelegate.swift; sourceTree = "<group>"; };
@@ -74,6 +76,7 @@
 			children = (
 				42CD6750258A253300B29FB2 /* FileManager+Extensions.swift */,
 				424D8D7B2590059D00C33093 /* UITextField+Extensions.swift */,
+				42486B6D25909EC4006453B9 /* UIBarButtonItem+Extensions.swift */,
 			);
 			path = Extensions;
 			sourceTree = "<group>";
@@ -197,6 +200,7 @@
 			isa = PBXSourcesBuildPhase;
 			buildActionMask = 2147483647;
 			files = (
+				42486B6E25909EC4006453B9 /* UIBarButtonItem+Extensions.swift in Sources */,
 				424D8D7C2590059D00C33093 /* UITextField+Extensions.swift in Sources */,
 				424D8D78259000B200C33093 /* DetailMemeViewViewController.swift in Sources */,
 				42EC6BBE2570FB6D003BF85B /* CreateMemeVC.swift in Sources */,

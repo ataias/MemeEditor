@@ -17,24 +17,14 @@ class CreateMemeVC: UIViewController, UIImagePickerControllerDelegate, UINavigat
     @IBOutlet weak var topTextField: UITextField!
     @IBOutlet weak var bottomTextField: UITextField!
     @IBOutlet weak var toolbar: UIToolbar!
+    @IBOutlet weak var finishEditingButton: UIBarButtonItem!
 
     // MARK: Properties
 
     let memeTextDelegate = MemeTextFieldDelegate()
 
     var meme: Meme?
-
-    var isEditable: Bool {
-        get {
-            return topTextField.isEnabled
-        }
-        set {
-            topTextField.isEnabled = newValue
-            bottomTextField.isEnabled = newValue
-            cameraButton.isEnabled = newValue && UIImagePickerController.isSourceTypeAvailable(.camera)
-            albumButton.isEnabled = newValue
-        }
-    }
+    var isEditMode: Bool = false
 
     // MARK: Overrides
 
@@ -51,8 +41,13 @@ class CreateMemeVC: UIViewController, UIImagePickerControllerDelegate, UINavigat
             self.topTextField.text = meme.topText
             self.imageView.image = meme.original.image
             self.bottomTextField.text = meme.bottomText
+        }
 
-            self.isEditable = false
+        if isEditMode {
+            navigationItem.hidesBackButton = true
+            shareButton.hide()
+        } else {
+            finishEditingButton.hide()
         }
     }
 
@@ -95,8 +90,10 @@ class CreateMemeVC: UIViewController, UIImagePickerControllerDelegate, UINavigat
         }
     }
 
-    @IBAction func enableEditing() {
-        isEditable = true
+    @IBAction func saveEdit() {
+        let image = generateMemedImage()
+        saveMeme(memeImage: image)
+        self.navigationController?.popToRootViewController(animated: true)
     }
 
     // MARK: Image methods
