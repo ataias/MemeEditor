@@ -24,6 +24,8 @@ class CreateMemeVC: UIViewController, UIImagePickerControllerDelegate, UINavigat
     let memeTextDelegate = MemeTextFieldDelegate()
 
     var meme: Meme?
+
+    /// Indicates we are editing an existing meme after coming from the detail view
     var isEditMode: Bool = false
 
     // MARK: Overrides
@@ -36,6 +38,12 @@ class CreateMemeVC: UIViewController, UIImagePickerControllerDelegate, UINavigat
         memeTextDelegate.postUpdateAction = { self.updateShareButton() }
         topTextField.applyMemeStyle(delegate: memeTextDelegate)
         bottomTextField.applyMemeStyle(delegate: memeTextDelegate)
+
+        // FIXME I tried changing the "Back" to "Cancel", but couldn't; I tried
+        // 1) navigationItem.backBarButtonItem = UIBarButtonItem(title: "Cancel", style: .plain, target: nil, action: nil)
+        // 2) setToolbarItems([UIBarButtonItem(title: "Cancel", style: .plain, target: nil, action: nil)], animated: false)
+
+        // None of these options yielded results
 
         if let meme = meme {
             self.topTextField.text = meme.topText
