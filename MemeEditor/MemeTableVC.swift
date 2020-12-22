@@ -88,11 +88,11 @@ class MemeTableVC: UIViewController, UITableViewDelegate, UITableViewDataSource 
     }
     
     func setupEmptyBackground() {
-        let image = UIImage(systemName: "icloud.and.arrow.down")!
+        let image = UIImage(systemName: "info.circle.fill")!
             .withRenderingMode(.alwaysTemplate)
             .applyingSymbolConfiguration(UIImage.SymbolConfiguration(pointSize: 64))!
 
-        let topMessage = "Memes"
+        let topMessage = "Memes List"
         let bottomMessage = "You don't have any memes yet. All your memes will show up here."
 
         tableView.backgroundView = EmptyBackgroundView(image: image, top: topMessage, bottom: bottomMessage)
