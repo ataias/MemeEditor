@@ -3,7 +3,7 @@
 	archiveVersion = 1;
 	classes = {
 	};
-	objectVersion = 50;
+	objectVersion = 52;
 	objects = {
 
 /* Begin PBXBuildFile section */
@@ -13,6 +13,8 @@
 		424D8D78259000B200C33093 /* DetailMemeViewViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = 424D8D77259000B200C33093 /* DetailMemeViewViewController.swift */; };
 		424D8D7C2590059D00C33093 /* UITextField+Extensions.swift in Sources */ = {isa = PBXBuildFile; fileRef = 424D8D7B2590059D00C33093 /* UITextField+Extensions.swift */; };
 		42567A1625729BF6009D4B5E /* MemeTextFieldDelegate.swift in Sources */ = {isa = PBXBuildFile; fileRef = 42567A1525729BF6009D4B5E /* MemeTextFieldDelegate.swift */; };
+		42965C092591F61200849E04 /* PureLayout in Frameworks */ = {isa = PBXBuildFile; productRef = 42965C082591F61200849E04 /* PureLayout */; };
+		42965C0C2591F62F00849E04 /* EmptyBackgroundedView.swift in Sources */ = {isa = PBXBuildFile; fileRef = 42965C0B2591F62F00849E04 /* EmptyBackgroundedView.swift */; };
 		42AD6A212574FCB30075E41A /* Meme.swift in Sources */ = {isa = PBXBuildFile; fileRef = 42AD6A202574FCB30075E41A /* Meme.swift */; };
 		42CD674D258A183100B29FB2 /* MemeTableVC.swift in Sources */ = {isa = PBXBuildFile; fileRef = 42CD674C258A183100B29FB2 /* MemeTableVC.swift */; };
 		42CD6751258A253300B29FB2 /* FileManager+Extensions.swift in Sources */ = {isa = PBXBuildFile; fileRef = 42CD6750258A253300B29FB2 /* FileManager+Extensions.swift */; };
@@ -34,6 +36,7 @@
 		424D8D77259000B200C33093 /* DetailMemeViewViewController.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = DetailMemeViewViewController.swift; sourceTree = "<group>"; };
 		424D8D7B2590059D00C33093 /* UITextField+Extensions.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = "UITextField+Extensions.swift"; sourceTree = "<group>"; };
 		42567A1525729BF6009D4B5E /* MemeTextFieldDelegate.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = MemeTextFieldDelegate.swift; sourceTree = "<group>"; };
+		42965C0B2591F62F00849E04 /* EmptyBackgroundedView.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = EmptyBackgroundedView.swift; sourceTree = "<group>"; };
 		42AD6A202574FCB30075E41A /* Meme.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = Meme.swift; sourceTree = "<group>"; };
 		42CD674C258A183100B29FB2 /* MemeTableVC.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = MemeTableVC.swift; sourceTree = "<group>"; };
 		42CD6750258A253300B29FB2 /* FileManager+Extensions.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = "FileManager+Extensions.swift"; sourceTree = "<group>"; };
@@ -55,6 +58,7 @@
 			isa = PBXFrameworksBuildPhase;
 			buildActionMask = 2147483647;
 			files = (
+				42965C092591F61200849E04 /* PureLayout in Frameworks */,
 			);
 			runOnlyForDeploymentPostprocessing = 0;
 		};
@@ -123,6 +127,7 @@
 				42EC6BC22570FB6E003BF85B /* Assets.xcassets */,
 				42EC6BC42570FB6E003BF85B /* LaunchScreen.storyboard */,
 				42EC6BC72570FB6E003BF85B /* Info.plist */,
+				42965C0B2591F62F00849E04 /* EmptyBackgroundedView.swift */,
 			);
 			path = MemeEditor;
 			sourceTree = "<group>";
@@ -143,6 +148,9 @@
 			dependencies = (
 			);
 			name = MemeEditor;
+			packageProductDependencies = (
+				42965C082591F61200849E04 /* PureLayout */,
+			);
 			productName = MemeEditor;
 			productReference = 42EC6BB62570FB6D003BF85B /* MemeEditor.app */;
 			productType = "com.apple.product-type.application";
@@ -170,6 +178,9 @@
 				Base,
 			);
 			mainGroup = 42EC6BAD2570FB6D003BF85B;
+			packageReferences = (
+				42965C072591F61200849E04 /* XCRemoteSwiftPackageReference "PureLayout" */,
+			);
 			productRefGroup = 42EC6BB72570FB6D003BF85B /* Products */;
 			projectDirPath = "";
 			projectRoot = "";
@@ -202,6 +213,7 @@
 			files = (
 				42486B6E25909EC4006453B9 /* UIBarButtonItem+Extensions.swift in Sources */,
 				424D8D7C2590059D00C33093 /* UITextField+Extensions.swift in Sources */,
+				42965C0C2591F62F00849E04 /* EmptyBackgroundedView.swift in Sources */,
 				424D8D78259000B200C33093 /* DetailMemeViewViewController.swift in Sources */,
 				42EC6BBE2570FB6D003BF85B /* CreateMemeVC.swift in Sources */,
 				42CD6751258A253300B29FB2 /* FileManager+Extensions.swift in Sources */,
@@ -413,6 +425,25 @@
 			defaultConfigurationName = Release;
 		};
 /* End XCConfigurationList section */
+
+/* Begin XCRemoteSwiftPackageReference section */
+		42965C072591F61200849E04 /* XCRemoteSwiftPackageReference "PureLayout" */ = {
+			isa = XCRemoteSwiftPackageReference;
+			repositoryURL = "git@github.com:PureLayout/PureLayout.git";
+			requirement = {
+				kind = upToNextMajorVersion;
+				minimumVersion = 3.1.6;
+			};
+		};
+/* End XCRemoteSwiftPackageReference section */
+
+/* Begin XCSwiftPackageProductDependency section */
+		42965C082591F61200849E04 /* PureLayout */ = {
+			isa = XCSwiftPackageProductDependency;
+			package = 42965C072591F61200849E04 /* XCRemoteSwiftPackageReference "PureLayout" */;
+			productName = PureLayout;
+		};
+/* End XCSwiftPackageProductDependency section */
 	};
 	rootObject = 42EC6BAE2570FB6D003BF85B /* Project object */;
 }

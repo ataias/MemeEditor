@@ -9,10 +9,24 @@ import UIKit
 
 class MemeTableVC: UIViewController, UITableViewDelegate, UITableViewDataSource {
 
+    // MARK: Properties
+
     var memes = [Meme]()
+
     @IBOutlet weak var tableView: UITableView!
 
+    // MARK: Table View Data Source
     func tableView(_ tableView: UITableView, numberOfRowsInSection section: Int) -> Int {
+
+        // http://www.benmeline.com/ios-empty-table-view-with-swift/
+        if memes.count == 0 {
+            tableView.separatorStyle = .none
+            tableView.backgroundView?.isHidden = false
+        } else {
+            tableView.separatorStyle = .singleLine
+            tableView.backgroundView?.isHidden = true
+        }
+
         return memes.count
     }
 
@@ -31,6 +45,7 @@ class MemeTableVC: UIViewController, UITableViewDelegate, UITableViewDataSource 
         return cell
     }
 
+    // MARK: Table View Delegate
     func tableView(_ tableView: UITableView, didSelectRowAt indexPath: IndexPath) {
         let detail = self.memes[indexPath.row]
         let detailVC = self.storyboard!.instantiateViewController(withIdentifier: "DetailMemeView") as! DetailMemeViewViewController
@@ -53,9 +68,12 @@ class MemeTableVC: UIViewController, UITableViewDelegate, UITableViewDataSource 
         return UISwipeActionsConfiguration(actions: [delete])
     }
 
+    // MARK: Overrides
     override func viewDidLoad() {
         super.viewDidLoad()
         tableView.delegate = self
+        setupEmptyBackground()
+
     }
 
     override func viewWillAppear(_ animated: Bool) {
@@ -69,6 +87,15 @@ class MemeTableVC: UIViewController, UITableViewDelegate, UITableViewDataSource 
         tableView.reloadData()
     }
     
+    func setupEmptyBackground() {
+        let image = UIImage(systemName: "icloud.and.arrow.down")!
+            .withRenderingMode(.alwaysTemplate)
+            .applyingSymbolConfiguration(UIImage.SymbolConfiguration(pointSize: 64))!
 
+        let topMessage = "Memes"
+        let bottomMessage = "You don't have any memes yet. All your memes will show up here."
+
+        tableView.backgroundView = EmptyBackgroundView(image: image, top: topMessage, bottom: bottomMessage)
+    }
     
 }
